@@ -3,15 +3,12 @@
 import PackageDescription
 
 let package = Package(
-        name: "AdventOfCode",
+        name: "Day1",
         dependencies: [
         ],
         targets: [
             .target(
-                    name: "AdventOfCode",
+                    name: "Day1",
                     dependencies: []),
-            .testTarget(
-                    name: "AdventOfCodeTests",
-                    dependencies: ["AdventOfCode"]),
         ]
 )

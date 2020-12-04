@@ -207,7 +207,7 @@ let input = [
 for x in input {
     for y in input {
         if (x + y == 2020) {
-            print (x * y)
+            print(x * y)
         }
     }
 }
@@ -217,9 +217,9 @@ for x in input {
 // I would think of a better algorithm, but it's 1am and I have work tomorrow
 for x in input {
     for y in input {
-            for z in input {
+        for z in input {
             if (x + y + z == 2020) {
-                print (x * y * z)
+                print(x * y * z)
             }
         }
     }

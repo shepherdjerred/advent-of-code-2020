@@ -1,20 +1,18 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.3
 
 import PackageDescription
 
 let package = Package(
         name: "AdventOfCode",
-        dependencies: [
-        ],
         targets: [
             .target(
                     name: "Day1",
-                    dependencies: []),
+                    resources: [.copy("input.txt")]),
             .target(
                     name: "Day2",
-                    dependencies: []),
+                    resources: [.copy("input.txt")]),
             .target(
                     name: "Day3",
-                    dependencies: []),
+                    resources: [.copy("input.txt")]),
         ]
 )

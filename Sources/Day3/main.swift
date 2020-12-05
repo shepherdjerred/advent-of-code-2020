@@ -15,7 +15,8 @@ func arrayFromContentsOfFileWithName(fileName: String) -> [String]? {
 
 // Simplest way to throw an error/exception with a custom message in Swift 2?
 // https://stackoverflow.com/a/40629365
-extension String: Error {}
+extension String: Error {
+}
 
 func readMap() -> Map? {
     guard let mapStringArray = arrayFromContentsOfFileWithName(fileName: "input") else {
@@ -56,15 +57,14 @@ class Map {
     init(entities: [[Entity]]) {
         self.entities = entities
         mapSize = MapSize(
-            height: entities.count,
-            width: entities[0].count
+                height: entities.count,
+                width: entities[0].count
         )
     }
 
     func get(position: Position) -> Entity {
         let adjustedX = position.x % mapSize.width
         let adjustedY = position.y % mapSize.height
-        print(adjustedX, adjustedY)
         return entities[adjustedY][adjustedX]
     }
 
@@ -105,7 +105,7 @@ func countCollisions(map: Map, strategy: MapTraversalStrategy, position: Positio
         return 0
     } else {
         print(position)
-        return  map.countCollision(position: position) + countCollisions(map: map, strategy: strategy, position: incrementPosition(position: position, strategy: strategy))
+        return map.countCollision(position: position) + countCollisions(map: map, strategy: strategy, position: incrementPosition(position: position, strategy: strategy))
     }
 }
 
@@ -119,10 +119,25 @@ guard let map = readMap() else {
     exit(1)
 }
 
-print(map.mapSize)
+func check(map: Map, strategy: MapTraversalStrategy) -> Int {
+    let origin = Position(x: 0, y: 0)
+    return countCollisions(map: map, strategy: strategy, position: origin)
+}
 
-let origin = Position(x: 0, y: 0)
-let strategy = MapTraversalStrategy(down: 1, right: 3)
-let collisions = countCollisions(map: map, strategy: strategy, position: origin)
+func checkMultiple(map: Map, strategies: [MapTraversalStrategy]) -> Int {
+    strategies.map {
+        check(map: map, strategy: $0)
+    }.reduce(1, { left, right in
+        left * right
+    })
+}
 
-print(collisions)
+let strategies = [
+    MapTraversalStrategy(down: 1, right: 1),
+    MapTraversalStrategy(down: 1, right: 3),
+    MapTraversalStrategy(down: 1, right: 5),
+    MapTraversalStrategy(down: 1, right: 7),
+    MapTraversalStrategy(down: 2, right: 1)
+]
+let product = checkMultiple(map: map, strategies: strategies)
+print(product)

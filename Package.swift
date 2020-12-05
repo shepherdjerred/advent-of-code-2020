@@ -14,5 +14,8 @@ let package = Package(
             .target(
                     name: "Day3",
                     resources: [.copy("input.txt")]),
+            .target(
+                    name: "Day4",
+                    resources: [.copy("input.txt")]),
         ]
 )

@@ -90,7 +90,7 @@ func isValid(passport: Passport) -> Bool {
         return false
     }
 
-    if (String(passportId).count != 9) {
+    if (passportId.count != 9) {
         print("PID: ", passportId)
         return false
     }
@@ -105,7 +105,7 @@ func attributesToPassport(array: [String]) -> Passport? {
     var height: String? = nil
     var hairColor: String? = nil
     var eyeColor: String? = nil
-    var passportId: Int? = nil
+    var passportId: String? = nil
     var countryId: String? = nil
 
     for entry in array {
@@ -133,7 +133,7 @@ func attributesToPassport(array: [String]) -> Passport? {
             eyeColor = value;
             break;
         case "pid":
-            passportId = Int(value);
+            passportId = value;
             break;
         case "cid":
             countryId = value;
@@ -160,7 +160,7 @@ struct Passport {
     let height: String?
     let hairColor: String?
     let eyeColor: String?
-    let passportId: Int?
+    let passportId: String?
     let countryId: String?
 }
 

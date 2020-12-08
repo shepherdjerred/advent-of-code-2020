@@ -34,7 +34,6 @@ func rowToInteger(row: String) -> Int? {
             return nil
         }
     }
-    print(binaryString)
     return Int(binaryString, radix: 2)
 }
 
@@ -49,7 +48,6 @@ func columnToInteger(column: String) -> Int? {
             return nil
         }
     }
-    print(binaryString)
     return Int(binaryString, radix: 2)
 }
 
@@ -64,8 +62,6 @@ func getStringEntries() -> [StringEntry] {
     return lines.map {
         let row: String = String($0.prefix(7))
         let column: String = String($0.suffix(3))
-        print(row)
-        print(column)
         return StringEntry(row: row, column: column)
     }
 }
@@ -82,10 +78,18 @@ func stringEntryToEntry(entry: StringEntry) -> Entry {
 
 let entries = getStringEntries().map {
     let temp = stringEntryToEntry(entry: $0)
-    print(temp)
     return temp
 }.map {
     entryToId(entry: $0)
 }.sorted()
 
-print(entries)
+guard let first = entries.first, let last = entries.last else {
+    exit(1)
+}
+
+for entry in (first)...(last) {
+    if (entries[entry - first] != entry) {
+        print(entry)
+        break;
+    }
+}

@@ -7,9 +7,9 @@ func arrayFromContentsOfFileWithName(fileName: String) -> [String]? {
 
     do {
         let content = try String(contentsOf: url, encoding: String.Encoding.utf8)
-        return content.components(separatedBy: "\n");
+        return content.components(separatedBy: "\n")
     } catch {
-        return nil;
+        return nil
     }
 }
 
@@ -21,10 +21,10 @@ struct PasswordEntry {
         self.password = password
     }
 
-    let minimum: Int;
-    let maximum: Int;
-    let letter: String;
-    let password: String;
+    let minimum: Int
+    let maximum: Int
+    let letter: String
+    let password: String
 }
 
 func parseEntry(input: String) -> PasswordEntry? {
@@ -35,10 +35,10 @@ func parseEntry(input: String) -> PasswordEntry? {
     )
 
     if let match = regex?.firstMatch(in: input, options: [], range: NSRange(location: 0, length: input.utf8.count)) {
-        var minimum: Int?;
-        var maximum: Int?;
-        var letter: String?;
-        var password: String?;
+        var minimum: Int?
+        var maximum: Int?
+        var letter: String?
+        var password: String?
 
         if let minRange = Range(match.range(at: 1), in: input) {
             minimum = Int(input[minRange])
@@ -75,7 +75,7 @@ func parseEntries(input: [String]) -> [PasswordEntry] {
 extension String {
     func count(of target: String) -> Int {
         assert(!target.isEmpty)
-        var count = 0;
+        var count = 0
         var searchRange: Range<String.Index>?
         while let foundRange = range(of: target, options: [], range: searchRange) {
             count += 1

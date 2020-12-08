@@ -7,12 +7,12 @@ func arrayFromContentsOfFileWithName(fileName: String) -> [Int]? {
 
     do {
         let content = try String(contentsOf: url, encoding: String.Encoding.utf8)
-        let strings = content.components(separatedBy: "\n");
+        let strings = content.components(separatedBy: "\n")
         return strings.flatMap {
             Int($0)
         }
     } catch {
-        return nil;
+        return nil
     }
 }
 
@@ -21,7 +21,7 @@ let input = arrayFromContentsOfFileWithName(fileName: "input") ?? []
 // yay, an O(n^2) algorithm!
 for x in input {
     for y in input {
-        if (x + y == 2020) {
+        if x + y == 2020 {
             print(x * y)
         }
     }
@@ -32,7 +32,7 @@ for x in input {
 for x in input {
     for y in input {
         for z in input {
-            if (x + y + z == 2020) {
+            if x + y + z == 2020 {
                 print(x * y * z)
             }
         }

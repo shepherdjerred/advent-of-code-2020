@@ -7,20 +7,20 @@ func arrayFromContentsOfFileWithName(fileName: String) -> [String]? {
 
     do {
         let content = try String(contentsOf: url, encoding: String.Encoding.utf8)
-        return content.components(separatedBy: "\n");
+        return content.components(separatedBy: "\n")
     } catch {
-        return nil;
+        return nil
     }
 }
 
 struct StringEntry {
-    let row: String;
-    let column: String;
+    let row: String
+    let column: String
 }
 
 struct Entry {
-    let row: Int;
-    let column: Int;
+    let row: Int
+    let column: Int
 }
 
 func rowToInteger(row: String) -> Int? {
@@ -28,7 +28,7 @@ func rowToInteger(row: String) -> Int? {
     for character in row {
         if character == "F" {
             binaryString.append("0")
-        } else if (character == "B") {
+        } else if character == "B" {
             binaryString.append("1")
         } else {
             return nil
@@ -42,7 +42,7 @@ func columnToInteger(column: String) -> Int? {
     for character in column {
         if character == "R" {
             binaryString.append("1")
-        } else if (character == "L") {
+        } else if character == "L" {
             binaryString.append("0")
         } else {
             return nil
@@ -88,8 +88,8 @@ guard let first = entries.first, let last = entries.last else {
 }
 
 for entry in (first)...(last) {
-    if (entries[entry - first] != entry) {
+    if entries[entry - first] != entry {
         print(entry)
-        break;
+        break
     }
 }

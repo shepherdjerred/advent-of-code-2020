@@ -7,9 +7,9 @@ func arrayFromContentsOfFileWithName(fileName: String) -> [String]? {
 
     do {
         let content = try String(contentsOf: url, encoding: String.Encoding.utf8)
-        return content.components(separatedBy: "\n");
+        return content.components(separatedBy: "\n")
     } catch {
-        return nil;
+        return nil
     }
 }
 
@@ -59,13 +59,13 @@ func isValid(passport: Passport) -> Bool {
 //            print("HV: ", heightValue)
             return false
         }
-        break;
+        break
     case "cm":
         if heightValue < 150 || heightValue > 193 {
 //            print("HV: ", heightValue)
             return false
         }
-        break;
+        break
     default:
 //        print("HU: ", heightUnit)
         return false
@@ -85,12 +85,12 @@ func isValid(passport: Passport) -> Bool {
         "hzl",
         "oth"
     ]
-    if (!eyeColors.contains(eyeColor)) {
+    if !eyeColors.contains(eyeColor) {
 //        print("EC: ", eyeColor)
         return false
     }
 
-    if (passportId.count != 9) {
+    if passportId.count != 9 {
         print("PID: ", passportId)
         return false
     }
@@ -99,14 +99,14 @@ func isValid(passport: Passport) -> Bool {
 }
 
 func attributesToPassport(array: [String]) -> Passport? {
-    var birthYear: Int? = nil
-    var issueYear: Int? = nil
-    var expirationYear: Int? = nil
-    var height: String? = nil
-    var hairColor: String? = nil
-    var eyeColor: String? = nil
-    var passportId: String? = nil
-    var countryId: String? = nil
+    var birthYear: Int?
+    var issueYear: Int?
+    var expirationYear: Int?
+    var height: String?
+    var hairColor: String?
+    var eyeColor: String?
+    var passportId: String?
+    var countryId: String?
 
     for entry in array {
         let splitEntry = entry.components(separatedBy: ":")
@@ -116,28 +116,28 @@ func attributesToPassport(array: [String]) -> Passport? {
         switch key {
         case "byr":
             birthYear = Int(value)
-            break;
+            break
         case "iyr":
             issueYear = Int(value)
-            break;
+            break
         case "eyr":
-            expirationYear = Int(value);
-            break;
+            expirationYear = Int(value)
+            break
         case "hgt":
-            height = value;
-            break;
+            height = value
+            break
         case "hcl":
-            hairColor = value;
-            break;
+            hairColor = value
+            break
         case "ecl":
-            eyeColor = value;
-            break;
+            eyeColor = value
+            break
         case "pid":
-            passportId = value;
-            break;
+            passportId = value
+            break
         case "cid":
-            countryId = value;
-            break;
+            countryId = value
+            break
         default:
             exit(1)
         }
@@ -168,14 +168,14 @@ guard let lines = arrayFromContentsOfFileWithName(fileName: "input") else {
     exit(1)
 }
 
-let attributes = lines.flatMap{
+let attributes = lines.flatMap {
     $0.components(separatedBy: " ")
 }
 
 var currentAttributes: [String] = []
-var passports: [Passport] = [];
+var passports: [Passport] = []
 for attribute in attributes {
-    if (attribute == "") {
+    if attribute == "" {
         guard let passport = attributesToPassport(array: currentAttributes) else {
             exit(1)
         }
@@ -186,7 +186,7 @@ for attribute in attributes {
     }
 }
 
-if (currentAttributes.count != 0) {
+if currentAttributes.count != 0 {
     guard let passport = attributesToPassport(array: currentAttributes) else {
         exit(1)
     }

@@ -7,9 +7,9 @@ func arrayFromContentsOfFileWithName(fileName: String) -> [String]? {
 
     do {
         let content = try String(contentsOf: url, encoding: String.Encoding.utf8)
-        return content.components(separatedBy: "\n");
+        return content.components(separatedBy: "\n")
     } catch {
-        return nil;
+        return nil
     }
 }
 

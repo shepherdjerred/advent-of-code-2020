@@ -27,13 +27,14 @@ func rowToInteger(row: String) -> Int? {
     var binaryString = ""
     for character in row {
         if character == "F" {
-            binaryString.append("1")
-        } else if (character == "B") {
             binaryString.append("0")
+        } else if (character == "B") {
+            binaryString.append("1")
         } else {
             return nil
         }
     }
+    print(binaryString)
     return Int(binaryString, radix: 2)
 }
 
@@ -48,6 +49,7 @@ func columnToInteger(column: String) -> Int? {
             return nil
         }
     }
+    print(binaryString)
     return Int(binaryString, radix: 2)
 }
 
@@ -62,6 +64,8 @@ func getStringEntries() -> [StringEntry] {
     return lines.map {
         let row: String = String($0.prefix(7))
         let column: String = String($0.suffix(3))
+        print(row)
+        print(column)
         return StringEntry(row: row, column: column)
     }
 }
@@ -77,7 +81,9 @@ func stringEntryToEntry(entry: StringEntry) -> Entry {
 }
 
 let entries = getStringEntries().map {
-    stringEntryToEntry(entry: $0)
+    let temp = stringEntryToEntry(entry: $0)
+    print(temp)
+    return temp
 }.map {
     entryToId(entry: $0)
 }.sorted()

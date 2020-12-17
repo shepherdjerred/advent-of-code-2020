@@ -16,12 +16,6 @@ func arrayFromContentsOfFileWithName(fileName: String) -> [[String]] {
     }
 }
 
-// What's the simplest way to convert from a single character String to an ASCII value in Swift?
-// https://stackoverflow.com/a/29835826
-extension StringProtocol {
-    var asciiValues: [UInt8] { compactMap(\.asciiValue) }
-}
-
 func answersToBitSet(answers: String) -> UInt32 {
     var value: UInt32 = 0
     let asciiLowercaseA: UInt32 = 97
@@ -48,8 +42,8 @@ func answerGroupsToBitSet(answerGroups: [[String]]) -> [[UInt32]] {
 }
 
 func bitwiseOrAnswerGroup(answerGroup: [UInt32]) -> UInt32 {
-    answerGroup.reduce(0, { left, right in
-        left | right
+    answerGroup.reduce(UInt32.max, { left, right in
+        left & right
     })
 }
 
